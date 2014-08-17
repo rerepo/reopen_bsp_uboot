@@ -181,7 +181,10 @@ int video_get_params (struct ctfb_res_modes *pPar, char *penv)
 	if (i >= 0) {
 		s += i;
 		s += strlen ("video=ctfb:");
+	} else {
+		return -1;
 	}
+
 	/* search for mode as a default value */
 	p = s;
 	t = 0;
