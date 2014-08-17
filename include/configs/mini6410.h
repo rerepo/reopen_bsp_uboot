@@ -172,7 +172,8 @@
  *
  * The stack sizes are set up in start.S using the settings below
  */
-#define CONFIG_STACKSIZE	0x40000		/* regular stack 256KB */
+//#define CONFIG_STACKSIZE	0x40000		/* regular stack 256KB */
+#define CONFIG_STACKSIZE	0x80000		/* extend stack 512KB */
 
 /**********************************
  Support Clock Settings
@@ -299,7 +300,7 @@
 
 /* Settings as above boot configuration */
 
-//#define CONFIG_ENV_IS_IN_NAND
+#define CONFIG_ENV_IS_IN_NAND
 
 #define CONFIG_BOOTARGS		"console=ttySAC,115200"
 
@@ -342,7 +343,7 @@
 #define CONFIG_VIDEO_BMP_GZIP
 #define CONFIG_CMD_UNZIP
 #define LCD_VIDEO_ADDR         0x57a00000
-#define LCD_VIDEO_BACKGROUND
+//#define LCD_VIDEO_BACKGROUND
 
 #if defined(LCD_VIDEO_BACKGROUND)
 #define LCD_VIDEO_BACKGROUND_ADDR         	(0x57600000)
@@ -369,7 +370,7 @@
 #define CONFIG_MMC			1
 #define CONFIG_S3C64X0_MMC			1
 #define CONFIG_CMD_MMC		/* MMC support			*/
-#define CONFIG_ENV_IS_IN_MMC		1
+//#define CONFIG_ENV_IS_IN_MMC		1
 #define CONFIG_SYS_MMC_ENV_DEV		0
 
 
