@@ -147,6 +147,22 @@
 #define CONFIG_KGDB_SER_INDEX	1	/* which serial port to use	 */
 #endif
 
+/*-----------------------------------------------------------------------
+ * Dynamic MTD partition support
+ */
+#define CONFIG_MTD_DEVICE
+#define CONFIG_MTD_PARTITIONS
+#define CONFIG_CMD_MTDPARTS     /* needed for mtdparts commands */
+
+#define MTDIDS_DEFAULT          "nand0=nand"
+#define MTDPARTS_DEFAULT        "mtdparts=nand:512k(u-boot),512k(env),8M(kernel),64M(rootfs),-(reserved)"
+//#define MTD_ACTIVE_PART         "nand,2"
+
+#define CONFIG_CMD_UBI
+#define CONFIG_CMD_UBIFS
+#define CONFIG_RBTREE
+#define CONFIG_LZO
+
 /*
  * Miscellaneous configurable options
  */
@@ -233,8 +249,9 @@
 				"bootm 0xc0018000"
 #else
 #define CONFIG_SYS_MAPPED_RAM_BASE	CONFIG_SYS_SDRAM_BASE
-#define CONFIG_BOOTCOMMAND	"nand read 0x50018000 0x60000 0x1c0000;" \
+//#define CONFIG_BOOTCOMMAND	"nand read 0x50018000 0x60000 0x1c0000;" \
 				"bootm 0x50018000"
+#define CONFIG_BOOTCOMMAND	"nand read 0x50008000 0x100000 0x800000; bootm 0x50008000"
 #endif
 
 /* NAND U-Boot load and start address */
@@ -302,7 +319,8 @@
 
 #define CONFIG_ENV_IS_IN_NAND
 
-#define CONFIG_BOOTARGS		"console=ttySAC,115200"
+//#define CONFIG_BOOTARGS		"console=ttySAC,115200"
+#define CONFIG_BOOTARGS		"root=ubi0:system ubi.mtd=3 rootfstype=ubifs init=/linuxrc console=ttySAC0,115200 mtdparts=\"NAND 1GiB 3,3V 8-bit:512k(u-boot),512k(env),8M(kernel),64M(rootfs),-(reserved)\""
 
 #if !defined(CONFIG_ENABLE_MMU)
 #define CONFIG_CMD_USB			1
@@ -355,6 +373,9 @@
 #define LCD_VIDEO_BACKGROUND_FLASH_ADDR		(0xa0000)
 #endif
 #define CONFIG_SYS_VIDEO_VCLOCK_HZ		(133000000)
+
+//NOTE: already define in videomodes.h
+//#define CONFIG_SYS_DEFAULT_VIDEO_MODE (0x212)
 
 //RAM_TEXT = 0x57e00000
 
